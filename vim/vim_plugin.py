@@ -56,10 +56,12 @@ def make_comment(lines):
       "python": "# {text}",
       "sh": "# {text}",
       "cpp": "// {text}",
+      "cxx": "// {text}",
       "c": "// {text}",
+      "h": "// {text}",
+      "hpp": "// {text}",
       "proto": "// {text}"
       }
-
   filetype = vim.eval("&filetype")
   if filetype in comment_syntax:
     comment = comment_syntax[filetype]
@@ -76,7 +78,6 @@ def add_presto_copyright():
   year = datetime.datetime.now().year
   author = getpass.getuser()
   length = len(vim.current.buffer)
-  print length
   if length == 0:
     return
   length = 5 if length > 5 else length
