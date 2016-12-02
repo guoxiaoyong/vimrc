@@ -6,6 +6,7 @@
 
 set number
 set modeline
+set modelines=10
 set showtabline=2
 set laststatus=2
 set cmdheight=2
