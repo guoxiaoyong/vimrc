@@ -2,4 +2,5 @@
 
 install:
 	cp -rf vimrc ~/.vimrc
+	rm -rf ~/.vim
 	cp -rf vim ~/.vim
