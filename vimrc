@@ -28,10 +28,6 @@ syntax enable
 
 colorscheme darkblue
 
-"nmap <C-\> ma:%!astyle<Enter>`a
-vmap <C-#> :py add_comment()
-vmap <C-$> :py remove_comment()
-
 set path+=$HOME/work/navi/**
 set tags+=$HOME/tags/tags
 
