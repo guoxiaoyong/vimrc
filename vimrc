@@ -13,6 +13,7 @@ set hls
 set incsearch
 set laststatus=2
 set modeline
+set modelines=10
 set mps+=<:>
 set number
 set showtabline=2
