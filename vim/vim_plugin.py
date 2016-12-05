@@ -95,5 +95,30 @@ def add_presto_copyright():
     vim.current.buffer.append(copyright, first_line)
 
 
+def get_selected_lines():
+  start_line = vim.eval('getpos("\'<")')[1]
+  end_line = vim.eval('getpos("\'>")')[1]
+  return int(start_line), int(end_line)
+
+
+def add_comment():
+  start_line, end_line = get_selected_lines()
+  print start_line, end_line
+  comments = make_comment(vim.current.buffer[start_line-1:end_line])
+  for lineno in range(start_line-1, end_line):
+    vim.current.buffer[lineno] = comments[lineno-start_line+1]
+
+
+def remove_comment():
+  start_line, end_line = get_selected_lines()
+  print start_line, end_line
+  for lineno in range(start_line-1, end_line):
+    line = vim.current.buffer[lineno]
+    n = 0
+    while line[n] in " #/":
+      n += 1
+    vim.current.buffer[lineno] = line[n:]
+
+
 if __name__ == "__main__":
   load_templates()

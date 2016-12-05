@@ -27,9 +27,9 @@ syntax enable
 
 colorscheme darkblue
 
-nmap <C-\> ma:%!astyle<Enter>`a
-nmap ) ma:%!iconv -f gbk -t utf8<Enter>`a
-nmap ( ma:%!dos2unix<CR>`a
+"nmap <C-\> ma:%!astyle<Enter>`a
+vmap <C-#> :py add_comment()
+vmap <C-$> :py remove_comment()
 
 set path+=$HOME/work/navi/**
 set tags+=$HOME/tags/tags
