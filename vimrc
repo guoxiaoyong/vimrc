@@ -6,19 +6,21 @@
 
 set nocompatible
 
-set ai
+set ai " auto indent
 set cmdheight=2
 set enc=utf8
-set hls
+set hls " highlight search
 set incsearch
 set laststatus=2
+set mps+=<:>
+set number " show line number
+set showtabline=2
+set sw=2 " shift width
+set nowrap
+
+" macos vim set modelines to 0 by default
 set modeline
 set modelines=10
-set mps+=<:>
-set number
-set showtabline=2
-set sw=2
-set nowrap
 
 " set listchars
 set listchars=trail:.,tab:>-
