@@ -18,6 +18,11 @@ set mps+=<:>
 set number
 set showtabline=2
 set sw=2
+set nowrap
+
+" set listchars
+set listchars=trail:.,tab:>-
+set list
 
 " convert tab to spaces
 set tabstop=2
