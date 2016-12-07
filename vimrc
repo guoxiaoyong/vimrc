@@ -33,6 +33,8 @@ set expandtab
 " for macos, syntax is off by default
 syntax enable
 
+colorscheme yjsimple
+
 colorscheme darkblue
 
 set path+=$HOME/work/navi/**
