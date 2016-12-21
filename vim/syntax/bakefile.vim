@@ -29,9 +29,8 @@ if version >= 508 || !exists("did_proto_syn_inits")
     command -nargs=+ HiLink hi def link <args>
   endif
 
-
-  HiLink bkVariables    keyword
-  HiLink bkKeyword      Keyword
+  HiLink bkRule         Function 
+  HiLink bkVariables    Keyword
   HiLink bkComment      Comment
   HiLink bkString       String
 

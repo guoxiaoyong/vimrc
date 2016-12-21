@@ -49,7 +49,8 @@ augroup end
 
 " Bakefile syntax
 augroup filetype
-  au! BufRead,BufNewFile *.bakefile bakefile setfiletype bakefile
+au! BufRead,BufNewFile *.bakefile :setlocal filetype=bakefile
+au! BufRead,BufNewFile bakefile :setlocal filetype=bakefile
 augroup end
 
 " Automatically removes trailing whitespaces before writing.
