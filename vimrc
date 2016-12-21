@@ -47,6 +47,11 @@ augroup filetype
 au! BufRead,BufNewFile *.proto
 augroup end
 
+" Bakefile syntax
+augroup filetype
+  au! BufRead,BufNewFile *.bakefile bakefile setfiletype bakefile
+augroup end
+
 " Automatically removes trailing whitespaces before writing.
 function! Action_on_bufwrite()
   py add_presto_copyright()
