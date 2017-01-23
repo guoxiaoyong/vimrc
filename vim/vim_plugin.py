@@ -5,6 +5,7 @@ import sys
 import stat
 import datetime
 import getpass
+import string
 import vim
 
 
@@ -29,7 +30,7 @@ def listdir(pathname):
 
 
 def load_templates():
- files, _ = listdir(TEMPLATE_HOME)
+ files = listdir(TEMPLATE_HOME)[0]
  global TEMPLATES
  for one_file in files:
    with open(one_file) as thefile:
@@ -99,6 +100,60 @@ def get_selected_lines():
   start_line = vim.eval('getpos("\'<")')[1]
   end_line = vim.eval('getpos("\'>")')[1]
   return int(start_line), int(end_line)-1
+
+
+# get the absolution path of the file
+# associated with current buffer
+def get_this_file():
+  return vim.eval("expand('%:p')")
+
+
+def gen_presto_guard_macro():
+  this_file = get_this_file()
+  topdir = get_top_git_dir()
+  rpath = os.path.relpath(this_file, topdir)
+  chset = string.letters + string.digits
+  res = []
+  for ch in rpath:
+    if ch in chset:
+      res.append(ch)
+    else:
+      res.append('_')
+  macro = ''.join(res)
+  return macro.upper() + '_'
+
+
+def add_cpp_header_guard():
+  guard_lines = ['#ifndef {}', '#define {}', '#endif  // {}']
+  macro = gen_presto_guard_macro()
+  guard_lines = [line.format(macro) for line in guard_lines]
+  length = len(vim.current.buffer)
+  if length == 0:
+    return
+  length = 5 if length > 5 else length
+  first_line = None
+  for lineno, line in enumerate(vim.current.buffer[:length]):
+    if "@guard" in line.lower().strip():
+      first_line = lineno
+      break
+
+  if first_line is not None:
+    del vim.current.buffer[first_line]
+    vim.current.buffer.append(guard_lines[:2], first_line)
+    vim.current.buffer.append(guard_lines[2])
+
+
+def get_top_git_dir():
+  this_file = get_this_file()
+  assert os.path.isabs(this_file), \
+      'File name error!' % this_file
+  path = this_file
+  for _ in range(100):  # or use While True??
+    path = os.path.split(path)[0]
+    if os.path.exists(os.path.join(path, '.git')):
+      return path
+    elif path == '/':
+      assert False, 'Current file is not in a git repository!'
 
 
 def add_comment():
