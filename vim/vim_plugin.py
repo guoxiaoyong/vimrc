@@ -131,6 +131,8 @@ def get_this_file():
 def gen_presto_guard_macro():
   this_file = get_this_file()
   topdir = get_top_git_dir()
+  if topdir is None:
+    return None
   rpath = os.path.relpath(this_file, topdir)
   chset = string.letters + string.digits
   res = []
@@ -146,6 +148,8 @@ def gen_presto_guard_macro():
 def add_cpp_header_guard():
   guard_lines = ['#ifndef {}', '#define {}', '#endif  // {}']
   macro = gen_presto_guard_macro()
+  if macro is None:
+    return
   guard_lines = [line.format(macro) for line in guard_lines]
   length = len(vim.current.buffer)
   if length == 0:
@@ -173,7 +177,7 @@ def get_top_git_dir():
     if os.path.exists(os.path.join(path, '.git')):
       return path
     elif path == '/':
-      assert False, 'Current file is not in a git repository!'
+      return None
 
 
 def add_comment():
