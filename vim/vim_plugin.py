@@ -12,6 +12,7 @@ import vim
 VIM_HOME = os.path.join(os.path.expanduser('~'), '.vim')
 TEMPLATE_HOME = os.path.join(VIM_HOME, 'template')
 TEMPLATES = {}
+TEMP_FILE = '/tmp/vim_py_temp'
 
 
 # list all files and directories on path `pathname`
@@ -100,6 +101,25 @@ def get_selected_lines():
   start_line = vim.eval('getpos("\'<")')[1]
   end_line = vim.eval('getpos("\'>")')[1]
   return int(start_line), int(end_line)-1
+
+
+def get_cursor_pos():
+  return int(vim.eval('getpos(".")')[1])
+
+
+def save_selected():
+  lineno = get_selected_lines()
+  with open(TEMP_FILE, "wt") as temp_file:
+    for line in vim.current.buffer[lineno[0]:lineno[1]+1]:
+      temp_file.write(line+'\n')
+
+
+
+def insert_temp_file():
+  cursor_line = get_cursor_pos()
+  with open(TEMP_FILE) as temp_file:
+    lines = temp_file.readlines()
+  vim.current.buffer.append(lines, get_cursor_pos())
 
 
 # get the absolution path of the file

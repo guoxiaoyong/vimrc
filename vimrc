@@ -53,6 +53,9 @@ au! BufRead,BufNewFile *.bakefile :setlocal filetype=bakefile
 au! BufRead,BufNewFile bakefile :setlocal filetype=bakefile
 augroup end
 
+vmap sy :py save_selected() <Enter>
+nmap sp :py insert_temp_file() <Enter>
+
 " Automatically removes trailing whitespaces before writing.
 function! Action_on_bufwrite()
   py add_presto_copyright()
