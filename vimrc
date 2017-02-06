@@ -35,7 +35,7 @@ syntax enable
 
 colorscheme yjsimple
 
-colorscheme darkblue
+"colorscheme darkblue
 
 set path+=$HOME/work/navi/**
 set tags+=$HOME/tags/tags
