@@ -17,6 +17,7 @@ set number " show line number
 set showtabline=2
 set sw=2 " shift width
 set nowrap
+set ruler
 
 " macos vim set modelines to 0 by default
 set modeline
