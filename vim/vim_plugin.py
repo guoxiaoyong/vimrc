@@ -76,7 +76,6 @@ def make_comment(lines):
 # check first 5 lines, if @presto is seen,
 # replace this line with copyright info
 def add_presto_copyright():
-  copyright = TEMPLATES['presto_copyright']
   year = datetime.datetime.now().year
   author = getpass.getuser()
   length = len(vim.current.buffer)
@@ -87,6 +86,12 @@ def add_presto_copyright():
   for lineno, line in enumerate(vim.current.buffer[:length]):
     if "@presto" in line.lower().strip():
       first_line = lineno
+      copyright = TEMPLATES['presto_copyright']
+      break
+
+    if "@xguo" in line.lower().strip():
+      first_line = lineno
+      copyright = TEMPLATES['xguo_copyright']
       break
 
   if first_line is not None:
